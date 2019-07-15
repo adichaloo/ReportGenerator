@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'Run/style.css'%}">
+</head>
+
+<body>
+  {%block body%}
+<form method="post" action="">
+  {%csrf_token%}
+  <table>
+<tr>Acitvity</tr>
+<td><input type="text" name="activity"></td>
+<br>
+<tr>Title</tr>
+<td> <input type="text" name="title"></td>
+<br>
+<tr>State/National</tr>
+<td><input type="text" name="state"></td>
+<br>
+<tr>Sponsoring</tr>
+<td><input type="text" name="sponsor"></td>
+<br>
+<tr>Name of organizer</tr>
+<td><input type="text" name="organizer"></td>
+<br>
+</table>
+<button type="submit">Submit</button>
+</form>
+<table style="width:100%;padding: 15px;text-align: left; border: 1px solid black;">
+<tr>
+  <td>Activity</td>
+  <td>Title</td>
+  <td>State</td>
+  <td>Orgainizer</td>
+</tr>
+{%for confi in confo%}
+  <tr>
+<td><h2>{{confi.activity}}</h2></td>
+<td><h2>{{confi.title}}</h2></td>
+<td><h2>{{confi.state}}</h2></td>
+<td><h2>{{confi.organizer}}</h2></td>
+<form method="post">
+        {%csrf_token%}
+        <td><a href="{{confi.id}}">Delete</a></td>
+      </form>
+</tr>
+{%endfor%}
+</table>
+{%endblock%}
+<a href ="{%url 'Run:faculty'%}">Faculty Page</a>
+</body>
+</html>

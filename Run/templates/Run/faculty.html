@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Faculty</title>
+  	{%load static%}
+  <link rel="stylesheet" href="{% static 'Run/style.css'%}">
+</head>
+<body>
+<a href="{%url 'Run:reports'%}">Complete Report</a></button>
+	<ul>
+        <li><a href="{%url 'Run:conf'%}">Conferences, Seminars, Symposia, Workshops, FDPs, STTPs - Organized /conducted</a> </li><br>
+        <li><a href="{%url 'Run:web'%}">Webinars, video conferences, invited talks, etc.</a></li><br>
+        <li><a href="{%url 'Run:collab'%}">Collaboration / MoU with National / International Institute/Industry /Research Center/Colleges/University.</a></li><br>
+        <li><a href="{%url 'Run:coi'%}">Center of innovation (CoI)/Center of excellence (CoE)</a></li><br>
+        <li><a href="{%url 'Run:isl'%}">Industry sponsored Laboratories.</a></li><br>
+        <li><a href="{%url 'Run:rgs'%}">Research Grants (SPPU/AICTE/DST/UGC/CSIR)</a></li><br>
+        <li><a href="{%url 'Run:rgd'%}">Research Grants (DRDO/ISRO/etc)</a></li><br>
+        <li>Support provided to students to carry out various projects</li><br>
+        <li>Consultancy </li><br>
+        <li>Patents</li><br>
+        <li>Books/Book Chapter(s) Published(through Approved publishers only)</li><br>
+        <li>Conferences, Seminars, Symposia, Workshops, FDP, STTP etc. - Attended</li><br>
+        <li>Research Publications in National and International Journals/Edited Books/Proceedings/Conference</li><br>
+        <li>Staff Achievement/Awards/Honors</li><br>
+        <li>Student Achievement/Awards/Honors</li><br>
+        <li>Departmental Achievement/Awards/Honors</li><br>
+        <li>Co-Curricular Activities (Conducted/Participated)</li><br>
+        <li>Extra Curricular Activities (Conducted/Participated)</li><br>
+        <li>Extension Activities</li><br>
+        <li>Industrial Visits / Tours</li><br>
+    </ul>
+<p style="text-align:bottom-right;"><a href="{%url 'Run:logoff'%}"> Log Out</a></p>
+</body>
+</html>

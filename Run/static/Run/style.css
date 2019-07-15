@@ -1,0 +1,117 @@
+
+.empty
+{
+
+	background-image:url("ptk.png");
+	background-repeat:no-repeat;
+	background-position:50% -35%;
+	background-size:500px 500px;
+
+	
+}
+body 
+{
+	font-family: Arial;
+	background-color: #10b7af;
+	padding: 80px;
+}
+
+.login-screen 
+{
+	margin: 30px auto;
+	width: 300px;
+	background-color: #FFF;
+	padding: 20px;
+	border-radius: 25px;
+}
+
+.app-title 
+{
+	text-align: center;
+	color: #777;
+}
+
+.login-form 
+{
+	text-align: center;
+}
+.control-group1
+{
+	margin-top:30px;
+	margin-bottom: 15px;
+}
+.control-group2 
+{
+	margin-top:15px;
+	margin-bottom: 15px;
+}
+
+input
+{
+	text-align: center;
+	background-color: #ECF0F1;
+	border: 2px solid transparent;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px 0;
+	width: 250px;
+}
+
+input:focus 
+{
+	border: 2px solid #3498DB;
+}
+input:hover
+{
+	box-shadow:  0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button 
+{
+	  border: 2px solid transparent;
+	  background-color: #3498DB;
+	  color: #ffffff;
+	  font-size: 16px;
+	  line-height: 25px;
+	  padding: 10px 0;
+	  border-radius: 8px;
+	  display: block;
+	  width: 250px;
+	  margin:0 auto;
+	  margin-bottom:30px;
+}
+
+.button:hover 
+{
+	background-color: #2980B9;
+	cursor:pointer;
+	box-shadow:  0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.boxstyle
+{
+	text-align:center;
+	border:2px solid transparent;
+	background-color:white;
+	width: 350px;
+	font-size:20px;
+	border-radius:15px;
+	padding:20px;
+	margin: 30px auto;
+}
+.boxstyle:hover
+{
+	box-shadow:  0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.boxstyle:focus
+{
+	border-color:blue;
+}
+.username
+{
+    position: fixed;
+    top: 0;
+    right: 10px;
+    font-family:"Times New Roman";
+    font-size:20px;
+}

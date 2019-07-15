@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Run1</title>
+	{%load static%}
+  <link rel="stylesheet" href="{% static 'Run/style.css'%}">
+</head>
+  <body>
+  {%block body%}
+  	<div class="username">
+		<h4>{{user}}</h4>
+	</div>
+	<div class="boxstyle">
+		<a href="{%url 'Run:student'%}"><p>Student</p>
+		<p>Achievements</p></a>
+	</div>
+	<div class="boxstyle">
+		<a href="{%url 'Run:faculty'%}"><p>Faculty</p>
+		<p>Information</p></a>
+	</div>
+  {% if user.is_superuser %}
+    <a href= "{%url 'Run:sorting'%}">Sorting</a>
+  {%endif%}
+  {%endblock%}
+  <p style="text-align:bottom-right;"><a href="{%url 'Run:logoff'%}"> Log Out</a></p>
+  </body>
+</html>

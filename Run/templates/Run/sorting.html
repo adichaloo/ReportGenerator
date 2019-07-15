@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>List</title>
+	{%load static%}
+  <link rel="stylesheet" href="{% static 'Run/style.css'%}">
+</head>
+  <body>
+  {%block body%}
+
+  <form method="post" action="{% url 'Run:sorting'%}">
+    {%csrf_token%}
+    <input type="text" name="k" placeholder="Search">
+    <button type="submit">Search</button>
+    {%if k%}
+    {%for confi in k%}
+      <tr>
+    <td><h2>{{confi.Conferences.profile.user.username}}</h2></td>
+    <td><h2>{{confi.Conferences.activity}}</h2></td>
+    <td><h2>{{confi.Conferences.title}}</h2></td>
+    <td><h2>{{confi.Conferences.state}}</h2></td>
+    <td><h2>{{confi.Conferences.organizer}}</h2></td>
+    </tr>
+      {%endfor%}
+      {%endif%}
+
+  <!--<select name="sort">
+    <option value="date">Date</option>
+    <option value="staff">Staff</option>
+    <option value="student">Student</option>
+    <option value="activity">Activity</option>
+  </select>
+  <br><br>
+  <input type="submit">-->
+  </form>
+  {% endblock %}
+  </body>
+</html>

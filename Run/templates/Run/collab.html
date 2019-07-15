@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'Run/style.css'%}">
+</head>
+
+<body>
+  {%block body%}
+        <form method="post" action="">
+          {%csrf_token%}
+          <table>
+        <tr>Acitvity</tr>
+        <td><input type="text" name="activity"></td>
+        <br>
+        <tr>Title</tr>
+        <td> <input type="text" name="title"></td>
+        <br>
+        <tr>Period</tr>
+        <td><input type="text" name="period"></td>
+        <br>
+        <tr>Co-ordinator</tr>
+        <td><input type="text" name="coordinator"></td>
+        <br>
+        <tr>Remark</tr>
+        <td><input type="text" name="remark"></td>
+        <br>
+
+        </table>
+        <button type="submit">Submit</button>
+        </form>
+        <table style="width:100%;padding: 15px;text-align: left; border: 1px solid black;">
+        <tr>
+          <td>Activity</td>
+          <td>Title</td>
+          <td>Period</td>
+          <td>Coordinator</td>
+          <td>Remark</td>
+        </tr>
+        {%for confi1 in confo%}
+          <tr>
+        <td><h2>{{confi1.activity}}</h2></td>
+        <td><h2>{{confi1.title}}</h2></td>
+        <td><h2>{{confi1.period}}</h2></td>
+        <td><h2>{{confi1.coordinator}}</h2></td>
+        <td><h2>{{confi1.remark}}</h2></td>
+        <form method="post">
+          {%csrf_token%}
+          <td><a href="{{confi1.id}}">Delete</a></td>
+        </form>
+        </tr>
+        {%endfor%}
+        </table>
+
+
+
+{%endblock%}
+<a href ="{%url 'Run:faculty'%}">Faculty Page</a>
+</body>
+</html>

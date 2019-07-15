@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+    {%load static%}
+  <link rel="stylesheet" href="{% static 'Run/style.css'%}">
+</head>
+  <body>
+  {%block body%}
+<form method="post" action="">
+    {%csrf_token%}
+	<div class="login-screen">
+			<div class="app-title">
+				<h1>Login</h1>
+			</div>
+			<div class="login-form">
+				<div class="control-group1">
+				<input type="text" placeholder="Username" name="username">
+				</div>
+
+				<div class="control-group2">
+				<input type="password" placeholder="Password" name="password">
+				</div>
+
+				<button class="button">login</button>
+                {%if err%}
+                    <p style="color:red;">{{err}}</p>
+                {%endif%}
+			</div>
+	</div>
+</form>
+   <center><a href="{%url 'Run:register'  %}">Register</a></center>
+  {% endblock %}
+</body>
+</html>

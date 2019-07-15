@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'Run/style.css'%}">
+</head>
+
+<body>
+  <button id="btnExport" onClick="fnExcelReport()">Export to xls</button>
+  {%block body%}
+  <table id="theTable" style="width:100%;padding: 15px;text-align: left; border: 1px solid black;">
+  <tr>
+    <td>Activity</td>
+    <td>Title</td>
+    <td>State</td>
+    <td>Orgainizer</td>
+  </tr>
+  {%for confi in conf%}
+    <tr>
+  <td><h2>{{confi.activity}}</h2></td>
+  <td><h2>{{confi.title}}</h2></td>
+  <td><h2>{{confi.state}}</h2></td>
+  <td><h2>{{confi.organizer}}</h2></td>
+  </tr>
+    {%endfor%}
+
+      <tr>
+        <td>Activity</td>
+        <td>Title</td>
+        <td>Speaker/Resource Person</td>
+        <td>No of participants</td>
+        <td>Remark</td>
+      </tr>
+  {%for confi in web%}
+  <tr>
+<td><h2>{{confi.activity}}</h2></td>
+<td><h2>{{confi.title}}</h2></td>
+<td><h2>{{confi.speaker}}</h2></td>
+<td><h2>{{confi.number}}</h2></td>
+<td><h2>{{confi.remark}}</h2></td>
+</tr>
+  {%endfor%}
+  </table>
+  {%endblock%}
+  <iframe id="dummyFrame" style="display:none"></iframe>
+<script>
+function fnExcelReport() {
+    var table = document.getElementById('theTable'); // id of table
+    var tableHTML = table.outerHTML;
+    var fileName = 'Report.xls';
+
+    var msie = window.navigator.userAgent.indexOf("MSIE ");
+
+    // If Internet Explorer
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+      dummyFrame.document.open('txt/html', 'replace');
+      dummyFrame.document.write(tableHTML);
+      dummyFrame.document.close();
+      dummyFrame.focus();
+      return dummyFrame.document.execCommand('SaveAs', true, fileName);
+    }
+    //other browsers
+    else {
+      var a = document.createElement('a');
+      tableHTML = tableHTML.replace(/  /g, '').replace(/ /g, '%20'); // replaces spaces
+      a.href = 'data:application/vnd.ms-excel,' + tableHTML;
+      a.setAttribute('download', fileName);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  }
+</script>
+ </body>
+  </html>

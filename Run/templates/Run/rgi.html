@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'Run/style.css'%}">
+</head>
+
+<body>
+  {%block body%}
+        <form method="post" action="">
+          {%csrf_token%}
+          <table>
+        <tr>Head</tr>
+        <td><input type="text" name="head"></td>
+        <br>
+        <tr>Title</tr>
+        <td> <input type="text" name="title"></td>
+        <br>
+        <tr>Authority</tr>
+        <td><input type="text" name="authority"></td>
+        <br>
+        <tr>Amount</tr>
+        <td><input type="text" name="grant"></td>
+        <br>
+        <tr>Period</tr>
+        <td><input type="text" name="period"></td>
+        <br>
+        <tr>Sanctioning order</tr>
+        <td><input type="text" name="order"></td>
+        <br>
+
+
+
+        </table>
+        <button type="submit">Submit</button>
+        </form>
+        <table style="width:100%;padding: 15px;text-align: left; border: 1px solid black;">
+        {%for confi in confo%}
+          <tr>
+        <td><h2>{{confi.Research_DRDO.head}}</h2></td>
+        <td><h2>{{confi.Research_DRDO.title}}</h2></td>
+        <td><h2>{{confi.Research_DRDO.authority}}</h2></td>
+        <td><h2>{{confi.Research_DRDO.grant}}</h2></td>
+        <td><h2>{{confi.Research_DRDO.period}}</h2></td>
+        <td><h2>{{confi.Research_DRDO.order}}</h2></td>
+        <form method="post">
+          {%csrf_token%}
+          <td><a href="{{confi.id}}">Delete</a></td>
+        </form>
+        </tr>
+        {%endfor%}
+        </table>
+
+
+
+{%endblock%}
+<a href ="{%url 'Run:faculty'%}">Faculty Page</a>
+</body>
+</html>
