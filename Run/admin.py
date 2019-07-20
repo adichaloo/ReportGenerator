@@ -38,12 +38,12 @@ class ProfileAdmin(admin.ModelAdmin):
         return ProfileChangeListForm"""
 
 class ConferencesAdmin(admin.ModelAdmin):
-    list_display=('profile1','activity',)
-    list_filter=('profile1','activity',)
+    list_display=('profile1','activity','date',)
+    list_filter=('profile1','activity','date',)
 
 class WebinarsAdmin(admin.ModelAdmin):
-    list_display=('profile1','activity',)
-    list_filter=('profile1','activity',)
+    list_display=('profile1','activity','date',)
+    list_filter=('profile1','activity','date',)
 
 class CollabAdmin(admin.ModelAdmin):
     list_display=('profile1','activity',)
@@ -58,12 +58,12 @@ class IndustryAdmin(admin.ModelAdmin):
     list_filter=('profile1','activity',)
 
 class Research1Admin(admin.ModelAdmin):
-    list_display=('profile1','title',)
-    list_filter=('profile1','title',)
+    list_display=('profile1','title','date',)
+    list_filter=('profile1','title','date',)
 
 class Research2Admin(admin.ModelAdmin):
-    list_display=('profile1','title',)
-    list_filter=('profile1','title',)
+    list_display=('profile1','title','date',)
+    list_filter=('profile1','title','date',)
 
 
 admin.site.register(Profile)

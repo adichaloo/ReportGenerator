@@ -24,6 +24,9 @@
 <tr>No of participants</tr>
 <td><input type="text" name="number"></td>
 <br>
+<tr>Date</tr>
+<td><input type="date" name="date"></td>
+<br>
 <tr>Remark</tr>
 <td><input type="text" name="remark"></td>
 <br>
@@ -37,6 +40,7 @@
   <td>Title</td>
   <td>Speaker/Resource Person</td>
   <td>No of participants</td>
+  <td>Date</td>
   <td>Remark</td>
 </tr>
 {%for confi in confo%}
@@ -45,6 +49,7 @@
 <td><h2>{{confi.title}}</h2></td>
 <td><h2>{{confi.speaker}}</h2></td>
 <td><h2>{{confi.number}}</h2></td>
+<td><h2>{{confi.date}}</h2></td>
 <td><h2>{{confi.remark}}</h2></td>
 <form method="post">
   {%csrf_token%}

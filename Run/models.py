@@ -25,6 +25,9 @@ class Conferences(models.Model):
     state=models.CharField(max_length=1000)
     sponsor=models.CharField(max_length=1000)
     organizer=models.CharField(max_length=1000)
+    date=models.DateField(null=True)
+    file=models.FileField(blank=True,null=True)
+
     #numb=models.IntegerField(default=0)
     #remarks=models.TextField()
     #acc_date=models.DateField(auto_now=False)
@@ -38,6 +41,7 @@ class Webinars(models.Model):
     title=models.CharField(max_length=1000)
     speaker=models.CharField(max_length=1000)
     number=models.CharField(max_length=1000)
+    date=models.DateField(null=True)
     remark=models.TextField(default='')
 
     def __str__(self):
@@ -83,6 +87,7 @@ class Research1(models.Model):
     authority=models.CharField(max_length=1000,default='')
     period=models.CharField(max_length=1000,default='')
     grant=models.CharField(max_length=1000,default='')
+    date=models.DateField(null=True)
     order=models.CharField(max_length=1000,default='')
 
     def __str__(self):
@@ -96,6 +101,7 @@ class Research2(models.Model):
     authority=models.CharField(max_length=1000,default='')
     period=models.CharField(max_length=1000,default='')
     grant=models.CharField(max_length=1000,default='')
+    date=models.DateField(null=True)
     order=models.CharField(max_length=1000,default='')
 
     def __str__(self):

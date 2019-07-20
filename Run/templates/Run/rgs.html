@@ -26,6 +26,9 @@
         <tr>Period</tr>
         <td><input type="text" name="period"></td>
         <br>
+        <tr>Date</tr>
+        <td><input type="date" name="date"></td>
+        <br>
         <tr>Sanctioning order</tr>
         <td><input type="text" name="order"></td>
         <br>
@@ -43,6 +46,7 @@
         <td><h2>{{confi.authority}}</h2></td>
         <td><h2>{{confi.grant}}</h2></td>
         <td><h2>{{confi.period}}</h2></td>
+        <td><h2>{{confi.date}}</h2></td>
         <td><h2>{{confi.order}}</h2></td>
         <form method="post">
           {%csrf_token%}

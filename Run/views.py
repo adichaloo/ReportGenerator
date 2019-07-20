@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from . models import *
 from django.views import View
+from django.db.models import Q
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 #import pandas as pd
 #from openpyxl import Workbook
 
@@ -20,13 +22,13 @@ class Register(View):
     def get(self,request):
         return render(request,self.template2,{})
     def post(self,request):
-        user=User.objects.create_user(username=request.POST["username"],password=request.POST["password"])
-        user.save()
-        profile=Profile.objects.create(user=user)
-        profile.save()
-        if user is not None:
-            return render(request,self.template1,{})
-        else:
+        try:
+            user=User.objects.create_user(username=request.POST["username"],password=request.POST["password"])
+            user.save()
+            profile=Profile.objects.create(user=user)
+            profile.save()
+            return render(request,self.template2,{"reg":"Registered"})
+        except IntegrityError:
             return render(request,self.template2,{"err":"Invalid registration"})
 
 class Login(View):
@@ -41,7 +43,7 @@ class Login(View):
         if user is not None:
             if user.is_active:
                 login(request,user)
-                return render(request,self.template1,{})
+                return redirect('Run:postlogin')
         else:
             return render(request,self.template,{"err":"Invalid Login"})
 
@@ -51,7 +53,7 @@ def logoff(request):
     return redirect('Run:login')
 
 class Postlog(View):
-    template1 = 'Run/poslogin.html'
+    template1 = 'Run/postlogin.html'
     def get(self,request):
         args={'user':request.user}
         return render (request, self.template1,args)
@@ -79,7 +81,7 @@ class Conf(View):
         #confi=Conferences.objects.create(profile=Profile.objects.get(user=request.user),activity=request.POST["activity"],title=request.POST["title"],state=request.POST["state"],sponsor=request.POST["sponsor"],organizer=request.POST["organizer"])
         #confi.save()
         profile=Profile.objects.get(user=request.user)
-        confi=Conferences(profile1=Profile.objects.get(user=request.user),activity=request.POST["activity"],title=request.POST["title"],state=request.POST["state"],sponsor=request.POST["sponsor"],organizer=request.POST["organizer"])
+        confi=Conferences(profile1=Profile.objects.get(user=request.user),activity=request.POST["activity"],title=request.POST["title"],state=request.POST["state"],sponsor=request.POST["sponsor"],organizer=request.POST["organizer"],date=request.POST["date"])
         confi.save()
         profile.conferences.add(confi)
         #conference=Conferences.objects.filter(profile=profile)
@@ -115,7 +117,9 @@ class Web(View):
             return render(request,'Run/postlogin.html',{})
     def post(self,request):
         profile=Profile.objects.get(user=request.user)
-        confi1=Webinars(profile1=Profile.objects.get(user=request.user),activity=request.POST["activity"],title=request.POST["title"],speaker=request.POST["speaker"],number=request.POST["number"],remark=request.POST["remark"])
+        confi1=Webinars(profile1=Profile.objects.get(user=request.user),activity=request.POST["activity"],title=request.POST["title"],speaker=request.POST["speaker"],number=request.POST["number"],date=request.POST["date"],remark=request.POST["remark"],file=request.FILES["file"])
+        fs=FileSystemStorage()
+        fs.save(file.name,file)
         confi1.save()
         profile.webinars.add(confi1)
         confer=profile.webinars.all()
@@ -265,7 +269,7 @@ class RG(View):
             return render(request,'Run/postlogin.html',{})
     def post(self,request):
 
-        confi=Research1(profile1=Profile.objects.get(user=request.user),head=request.POST["head"],title=request.POST["title"],authority=request.POST["authority"],grant=request.POST["grant"],period=request.POST["period"],order=request.POST["order"])
+        confi=Research1(profile1=Profile.objects.get(user=request.user),head=request.POST["head"],title=request.POST["title"],authority=request.POST["authority"],grant=request.POST["grant"],period=request.POST["period"],date=request.POST["date"],order=request.POST["order"])
         confi.save()
         #ball=Bio.objects.create(profile=Profile.objects.get(user=request.user),Research_Grants=confi)
         #ball.save()
@@ -302,7 +306,7 @@ class RG1(View):
             return render(request,'Run/postlogin.html',{})
     def post(self,request):
 
-        confi=Research2(profile1=Profile.objects.get(user=request.user),head=request.POST["head"],title=request.POST["title"],authority=request.POST["authority"],grant=request.POST["grant"],period=request.POST["period"],order=request.POST["order"])
+        confi=Research2(profile1=Profile.objects.get(user=request.user),head=request.POST["head"],title=request.POST["title"],authority=request.POST["authority"],grant=request.POST["grant"],period=request.POST["period"],date=request.POST["date"],order=request.POST["order"])
         confi.save()
         #ball=Bio.objects.create(profile=Profile.objects.get(user=request.user),Research_Industry=confi)
         #ball.save()
@@ -329,9 +333,6 @@ def rgd_delete(request,id=None):
         conference=profile.research2.all()
         return redirect('../rgd')
 
-
-
-
 class Report(View):
     template='Run/reports.html'
     def get(self,request):
@@ -341,10 +342,24 @@ class Report(View):
             web=profile.webinars.all()
             return render(request,self.template,{"conf":conf,"web":web})
 
+
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
 class Sorter(View):
-    template1 = 'Run/poslogin.html'
-    template3='Run/sorting.html'
     def get(self,request):
         if request.user.is_superuser:
-            return render(request,self.template3,{})
+            return render(request,"Run/sorting.html",{"qs":None})
+
+    def post(self,request):
+        print("Hello")
+        activity_query = request.POST['title_contains']
+        name_query = request.POST['id_exact']
+        date_min = request.POST['date_min']
+        date_max = request.POST['date_max']
+        print(activity_query)
+        if is_valid_queryparam(activity_query):
+            qs=Profile.objects.filter(Q(conferences__activity__icontains=activity_query)|Q(webinars__activity__icontains=activity_query))
+        print(qs)
+        return render(request,"Run/sorting.html",{'qs':qs})
     #def post(self,request):"""

@@ -18,7 +18,7 @@ from django.urls import path
 from . import views
 app_name='Run'
 urlpatterns = [
-    #path('sorting/',views.Sorter.as_view(),name='sorting'),
+    path('sorting/',views.Sorter.as_view(),name='sorting'),
     path('',views.Login.as_view(),name='login'),
     #path('Excel/',views.Excel,name='Excel'),
     path('register/',views.Register.as_view(),name='register'),

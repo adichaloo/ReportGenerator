@@ -26,6 +26,12 @@
 <tr>Name of organizer</tr>
 <td><input type="text" name="organizer"></td>
 <br>
+<tr>Date</tr>
+<td><input type="date" name="date"></td>
+<br>
+<tr>File Upload</tr>
+<td><input type="file" name="file"></td>
+<br>
 </table>
 <button type="submit">Submit</button>
 </form>
@@ -35,6 +41,8 @@
   <td>Title</td>
   <td>State</td>
   <td>Orgainizer</td>
+  <td>Date</td>
+  <td>File</td>
 </tr>
 {%for confi in confo%}
   <tr>
@@ -42,6 +50,7 @@
 <td><h2>{{confi.title}}</h2></td>
 <td><h2>{{confi.state}}</h2></td>
 <td><h2>{{confi.organizer}}</h2></td>
+<td><h2>{{confi.date}}</h2></td>
 <form method="post">
         {%csrf_token%}
         <td><a href="{{confi.id}}">Delete</a></td>
